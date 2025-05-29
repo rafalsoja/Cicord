@@ -1,4 +1,5 @@
 # Cicord
+![Python](https://img.shields.io/badge/python-3.11-blue)
 
 A simple Discord bot built with [discord.py](https://github.com/Rapptz/discord.py).
 
