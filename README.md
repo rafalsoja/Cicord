@@ -5,20 +5,16 @@ A simple Discord bot built with [discord.py](https://github.com/Rapptz/discord.p
 
 ## Features
 
-- Modular cog structure for easy extension
-- Loads configuration from `.env` file
-- Customizable command prefix
+- TODO
 
 ## Getting Started
 
 ### Prerequisites
 
-- Python 3.8+
-- [pip](https://pip.pypa.io/en/stable/)
+- TODO
 
 ### Installation
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/yourusername/Cicord.git
-   cd Cicord
+   TODO
