@@ -1,14 +1,17 @@
 from discord.ext import commands
 import discord, os, sys, openai, asyncio
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from config import OPENAI_API_KEY
 from openai import OpenAI
+
+# Ensure the parent directory is in the path to import config
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 class AI(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         openai.api_key = OPENAI_API_KEY
 
+    # Command to ask a question to the AI
     @commands.command(name='ask')
     async def ask(self, ctx, *, question: str):
         embed = discord.Embed(
@@ -28,7 +31,6 @@ class AI(commands.Cog):
                 instructions="You are a helpful assistant. Answer the question to the best of your ability.",
                 input=question
             )
-            #answer = response['choices'][0]['message']['content']
             await message.delete()
             embed = discord.Embed(
                 title="Response 👌",
