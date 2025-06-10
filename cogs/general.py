@@ -1,13 +1,16 @@
 import discord
 from discord.ext import commands
 
-class general(commands.Cog):
+class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
     @commands.command(name='cogs')
     async def cogs(self, ctx):
-        """List all activated cogs."""
+        """
+        Lists all activated cogs except the 'general' cog.
+        This command is useful for checking which cogs are currently active in the bot.        
+        """
         activated_cogs = [cog for cog in self.bot.cogs if cog != "general"]
         if not activated_cogs:
             embed = discord.Embed(title="Activated Cogs", description="No cogs are currently activated.", color=discord.Color.red())
@@ -17,7 +20,11 @@ class general(commands.Cog):
 
     @commands.command(name='enablecog')
     async def enable_cog(self, ctx, cog_name: str): 
-        """Enable a cog by name."""
+        """
+        Enable a cog by name. The cog must be in the 'cogs' directory.
+        Inside config.py, you can specify which cogs to load at startup.
+        Example: !enablecog admin
+        """
         full_name = f'cogs.{cog_name}'
         if full_name in self.bot.extensions:
             embed = discord.Embed(
@@ -43,7 +50,12 @@ class general(commands.Cog):
 
     @commands.command(name='disablecog')
     async def disable_cog(self, ctx, cog_name: str):
-        """Disable a cog by name."""
+        """
+        Disables and unloads a cog by name.
+        The cog must be in the 'cogs' directory and currently enabled.
+        Example: !disablecog admin
+        
+        """
         full_name = f'cogs.{cog_name}'
         if full_name not in self.bot.extensions:
             embed = discord.Embed(
@@ -69,5 +81,5 @@ class general(commands.Cog):
 
 
 async def setup(bot):
-    await bot.add_cog(general(bot))
+    await bot.add_cog(General(bot))
     print("General Cog loaded successfully.")
