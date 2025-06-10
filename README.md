@@ -7,7 +7,9 @@ A simple Discord bot built with [discord.py](https://github.com/Rapptz/discord.p
 
 ## Features
 
-- TODO
+- 💬 AI-powered conversation: The bot can chat with users using AI-generated responses.
+- 🎵 Music player: Streams audio from YouTube and other sources using `yt-dlp`.
+- ⏱️ Simple commands, easy setup.
 
 ## Getting Started
 
@@ -15,8 +17,34 @@ A simple Discord bot built with [discord.py](https://github.com/Rapptz/discord.p
 
 - TODO
 
-### Installation
+## Installation
+
+Follow these steps to set up the bot on your local machine:
 
 1. **Clone the repository:**
    ```sh
-   TODO
+   git clone https://github.com/Cichaj/Cicord.git
+   cd Cicord
+   ```
+
+2. **Install dependencies:**
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+3. **Configure your environment** (choose one):
+   - Create `.env` file:
+     ```ini
+     DISCORD_TOKEN=your-token
+     OPENAI_API_KEY=your-key  # optional
+     ```
+   - **OR** edit directly in `config.py`:
+     ```python
+     TOKEN = "your-token"
+     OPENAI_KEY = "your-key"  # optional
+     ```
+
+4. **Run the bot:**
+   ```sh
+   python bot.py
+   ```

@@ -4,17 +4,69 @@ from discord.ext import commands
 class general(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    @commands.command(name='stats')
-    async def stats(self, ctx):
-        embed = discord.Embed(
-            title="Bot Statistics",
-            description="Here are the current statistics of the bot.",
-            color=discord.Color.blue()
-        )
-        embed.add_field(name="Servers", value=len(self.bot.guilds), inline=True)
-        embed.add_field(name="Users", value=len(set(self.bot.get_all_members())), inline=True)
-        embed.add_field(name="Commands", value=len(self.bot.commands), inline=True)
+    
+    @commands.command(name='cogs')
+    async def cogs(self, ctx):
+        """List all activated cogs."""
+        activated_cogs = [cog for cog in self.bot.cogs if cog != "general"]
+        if not activated_cogs:
+            embed = discord.Embed(title="Activated Cogs", description="No cogs are currently activated.", color=discord.Color.red())
+            return await ctx.send(embed=embed)
+        embed = discord.Embed(title="Activated Cogs", description="\n".join(activated_cogs), color=discord.Color.blue())
         await ctx.send(embed=embed)
+
+    @commands.command(name='enablecog')
+    async def enable_cog(self, ctx, cog_name: str): 
+        """Enable a cog by name."""
+        full_name = f'cogs.{cog_name}'
+        if full_name in self.bot.extensions:
+            embed = discord.Embed(
+                title="Cog Already Enabled",
+                description=f"The cog `{cog_name}` is already enabled.",
+                color=discord.Color.red()
+            )
+            return await ctx.send(embed=embed)
+        try:
+            await self.bot.load_extension(full_name)
+            embed = discord.Embed(
+                title="Cog Enabled",
+                description=f"The cog `{cog_name}` has been enabled.",
+                color=discord.Color.green()
+            )
+        except Exception as e:
+            embed = discord.Embed(
+                title="Error Enabling Cog",
+                description=f"Failed to enable `{cog_name}`: {type(e).__name__} - {e}",
+                color=discord.Color.red()
+            )
+        await ctx.send(embed=embed)
+
+    @commands.command(name='disablecog')
+    async def disable_cog(self, ctx, cog_name: str):
+        """Disable a cog by name."""
+        full_name = f'cogs.{cog_name}'
+        if full_name not in self.bot.extensions:
+            embed = discord.Embed(
+                title="Cog Not Found",
+                description=f"The cog `{cog_name}` is not currently enabled.",
+                color=discord.Color.red()
+            )
+            return await ctx.send(embed=embed)
+        try:
+            await self.bot.unload_extension(full_name)
+            embed = discord.Embed(
+                title="Cog Disabled",
+                description=f"The cog `{cog_name}` has been disabled.",
+                color=discord.Color.green()
+            )
+        except Exception as e:
+            embed = discord.Embed(
+                title="Error Disabling Cog",
+                description=f"Failed to disable `{cog_name}`: {type(e).__name__} - {e}",
+                color=discord.Color.red()
+            )
+        await ctx.send(embed=embed)
+
 
 async def setup(bot):
     await bot.add_cog(general(bot))
