@@ -8,7 +8,7 @@ A simple Discord bot built with [discord.py](https://github.com/Rapptz/discord.p
 ## Features
 
 - 💬 AI-powered conversation: The bot can chat with users using AI-generated responses.
-- 🎵 Music player: Streams audio from YouTube and other sources using `yt-dlp`.
+- 🎵 Music player (WIP): Streams audio from YouTube and other sources using `yt-dlp`. 
 - ⏱️ Simple commands, easy setup.
 
 ## Getting Started
