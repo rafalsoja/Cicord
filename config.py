@@ -14,4 +14,5 @@ PREFIX = "!"
 ACTIVATED_COGS = [
     "admin",
     "ai",
-    "general"]
+    "general",
+    "music",]
