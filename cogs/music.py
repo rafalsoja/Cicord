@@ -3,6 +3,7 @@ from discord.ext import commands
 import yt_dlp as youtube_dl
 import asyncio
 
+# Initialize youtube-dl options
 ytdl_format_options = {
     'format': 'bestaudio/best',
     'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
@@ -17,6 +18,7 @@ ytdl_format_options = {
     'source_address': '0.0.0.0',
 }
 
+# FFmpeg options for audio processing
 ffmpeg_options = {
     'options': '-vn',
     'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5'
@@ -25,6 +27,10 @@ ffmpeg_options = {
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
 class YTDLSource(discord.PCMVolumeTransformer):
+    """
+    A class to handle YouTube audio extraction and playback in Discord.
+    This class extends discord's PCMVolumeTransformer to allow volume control.
+    """
     def __init__(self, source, *, data, volume=0.5):
         super().__init__(source, volume)
         self.data = data
@@ -44,6 +50,10 @@ class YTDLSource(discord.PCMVolumeTransformer):
         return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
 class Music(commands.Cog):
+    """
+    A simple music player cog for Discord bots using discord.py and youtube-dl.
+    This cog allows users to play, pause, resume, stop music, and change volume.
+    It also provides error handling and feedback through Discord embeds."""
     def __init__(self, bot):
         self.bot = bot
         self.queue = []
@@ -120,7 +130,7 @@ class Music(commands.Cog):
 
     @commands.command(name='pause', help='Pauses the currently playing music')
     async def pause(self, ctx):
-        if ctx.voice_client and ctx.voice_client.is_playing():
+        if ctx.voice_client.is_playing():
             ctx.voice_client.pause()
             embed = await self.create_music_embed(
                 "⏸️ Paused",
@@ -138,7 +148,7 @@ class Music(commands.Cog):
 
     @commands.command(name='resume', help='Resumes paused music')
     async def resume(self, ctx):
-        if ctx.voice_client and ctx.voice_client.is_paused():
+        if ctx.voice_client.is_paused():
             ctx.voice_client.resume()
             embed = await self.create_music_embed(
                 "▶️ Resume",
@@ -156,10 +166,10 @@ class Music(commands.Cog):
 
     @commands.command(name='volume', help='Changes volume (0-100)')
     async def volume(self, ctx, volume: int):
-        if ctx.voice_client is None or ctx.voice_client.source is None:
+        if ctx.voice_client is None:
             embed = await self.create_music_embed(
                 "❌ Error",
-                "Nothing is playing or you're not on a voice channel!",
+                "You're not on a voice channel!",
                 color=0xff0000
             )
             return await ctx.send(embed=embed)
