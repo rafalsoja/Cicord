@@ -52,7 +52,6 @@ jobs:
 
     - name: Restart service as admin
       run: |
-        ssh -tt debian@${{ secrets.SSH_HOST }} << EOF
+        ssh debian@${{ secrets.SSH_HOST }} << EOF
           sudo systemctl restart cicord
-          exit
         EOF
