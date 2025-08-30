@@ -19,7 +19,7 @@ async def load_cogs():
 # Event to notify when the bot is ready
 @bot.event
 async def on_ready():
-    print(f'Logged in as {bot.user} (ID: {bot.user.id})')
+    print(f'✅ Logged in as {bot.user} (ID: {bot.user.id})')
 
 # Event to notify when the bot is connected to Discord
 if __name__ == '__main__':
