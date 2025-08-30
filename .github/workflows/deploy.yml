@@ -54,4 +54,5 @@ jobs:
       run: |
         ssh -tt debian@${{ secrets.SSH_HOST }} << EOF
           sudo systemctl restart cicord
+          exit
         EOF
