@@ -1,6 +1,7 @@
 # Cicord
 ![Static Badge](https://img.shields.io/badge/noob-coding-blue)
 ![Build](https://github.com/Cichaj/Cicord/actions/workflows/python-app.yml/badge.svg)
+[![🚀 Deploy to Server](https://github.com/rafalsoja/Cicord/actions/workflows/deploy.yml/badge.svg)](https://github.com/rafalsoja/Cicord/actions/workflows/deploy.yml)
 
 
 A simple Discord bot built with [discord.py](https://github.com/Rapptz/discord.py).

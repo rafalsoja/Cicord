@@ -23,8 +23,8 @@ jobs:
     - name: Deploy via SSH
       run: |
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-          cd /home/bot/cicord
-          git pull origin main
-          chown bot:bot * -R
+          sudo cd /home/bot/cicord
+          sudo git pull origin main
+          sudo chown bot:bot * -R
           sudo service restart cicord
         EOF
