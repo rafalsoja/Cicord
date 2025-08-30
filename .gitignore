@@ -3,3 +3,5 @@ __pycache__
 .vscode
 tests/__pycache__
 verifdb.sqlite3
+.venv
+venv
