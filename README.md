@@ -48,3 +48,9 @@ Follow these steps to set up the bot on your local machine:
    ```sh
    python bot.py
    ```
+
+## Setting up verify cog:
+1. **Choose a channel and enter this command:**
+   ``` 
+   !setupverify @rule password question
+   ```

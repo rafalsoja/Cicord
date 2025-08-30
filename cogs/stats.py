@@ -50,4 +50,4 @@ async def setup(bot):
     # Saving the start time when the bot is loaded
     bot.start_time = datetime.now()
     await bot.add_cog(StatsCog(bot))
-    print("Stats Cog loaded successfully.")
+    print("✅ Stats Cog loaded successfully.")

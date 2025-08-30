@@ -16,4 +16,5 @@ ACTIVATED_COGS = [
     "ai",
     "general",
     "music",
-    "stats",]
+    "stats",
+    "verify"]

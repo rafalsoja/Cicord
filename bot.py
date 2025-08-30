@@ -4,6 +4,7 @@ from config import TOKEN, PREFIX, ACTIVATED_COGS
 
 intents = discord.Intents.default()
 intents.message_content = True
+intents.members = True
 bot = commands.Bot(command_prefix=PREFIX, intents=intents)
 
 # Load all cogs from the cogs directory

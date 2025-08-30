@@ -82,4 +82,4 @@ class General(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(General(bot))
-    print("General Cog loaded successfully.")
+    print("✅ General Cog loaded successfully.")
