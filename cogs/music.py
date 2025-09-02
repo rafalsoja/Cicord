@@ -61,6 +61,22 @@ class Music(commands.Cog):
         self.current = None
 
     async def create_music_embed(self, title, description, color=0x00ff00):
+        """
+        Creates a Discord embed for the music player
+
+        This function creates a Discord embed based on the given title, description, and color.
+        If the current music has a thumbnail, it will be set as the thumbnail of the embed.
+        The Cicord Music Player text will be set as the footer of the embed.
+
+        :param title: The title of the embed
+        :type title: str
+        :param description: The description of the embed
+        :type description: str
+        :param color: The color of the embed, defaults to 0x00ff00 (green)
+        :type color: int, optional
+        :return: The created Discord embed
+        :rtype: discord.Embed
+        """
         embed = discord.Embed(
             title=title,
             description=description,
@@ -73,6 +89,22 @@ class Music(commands.Cog):
 
     @commands.command(name='play', help='Plays a music from a URL or search term')
     async def play(self, ctx, *, url):
+        """
+        Plays a music from a URL or search term
+
+        This command plays a music from a given URL or search term. It will
+        connect to the user's voice channel if the bot is not already connected
+        to one. If an error occurs while connecting, it will send an error message
+        to the channel. When the music is finished playing, it will disconnect
+        from the voice channel if it is not playing or paused.
+
+        :param url: The URL or search term of the music to play
+        :type url: str
+
+        :raises: Exception if an error occurs while connecting to the voice channel
+        :raises: discord.Forbidden if the bot lacks permission to connect to the voice channel
+        :raises: discord.HTTPException if an error occurs while sending the message to the channel
+        """
         if not ctx.author.voice:
             embed = await self.create_music_embed(
                 "❌ Error",
@@ -122,6 +154,9 @@ class Music(commands.Cog):
 
     @commands.command(name='stop', help='Stops playing music and disconnects from the voice channel')
     async def stop(self, ctx):
+        """
+        Stops playing music and disconnects from the voice channel. If the bot is not connected to a voice channel, it will return an error message.
+        """
         if ctx.voice_client:
             await ctx.voice_client.disconnect()
             embed = await self.create_music_embed(
@@ -140,6 +175,12 @@ class Music(commands.Cog):
 
     @commands.command(name='pause', help='Pauses the currently playing music')
     async def pause(self, ctx):
+        """
+        Pauses the currently playing music
+
+        This command pauses the music player if it is currently playing.
+        If the music player isn't playing, it will return an error message.
+        """
         if ctx.voice_client.is_playing():
             ctx.voice_client.pause()
             embed = await self.create_music_embed(
@@ -158,6 +199,13 @@ class Music(commands.Cog):
 
     @commands.command(name='resume', help='Resumes paused music')
     async def resume(self, ctx):
+        """
+        Resumes paused music
+
+        This command resumes the music player if it is currently paused.
+        If the music player isn't paused, it will return an error message.
+        """
+        
         if ctx.voice_client.is_paused():
             ctx.voice_client.resume()
             embed = await self.create_music_embed(
@@ -176,6 +224,14 @@ class Music(commands.Cog):
 
     @commands.command(name='volume', help='Changes volume (0-100)')
     async def volume(self, ctx, volume: int):
+        """
+        Changes volume of the music player (0-100)
+
+        This command takes an integer between 0 and 100 as an argument.
+        If the argument is invalid, it will return an error message.
+        If the argument is valid, it will set the volume of the music player
+        and return a success message.
+        """
         if ctx.voice_client is None:
             embed = await self.create_music_embed(
                 "❌ Error",
