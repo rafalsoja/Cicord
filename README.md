@@ -14,9 +14,10 @@ A simple Discord bot built with [discord.py](https://github.com/Rapptz/discord.p
 
 ## Getting Started
 
-### Prerequisites
+### Required Software
 
-- TODO
+1. **FFMPEG**: Make sure you have FFMPEG installed on your system. You can download it from [FFMPEG's official website](https://ffmpeg.org/download.html).
+2. **Python 3.8+**
 
 ## Installation
 
