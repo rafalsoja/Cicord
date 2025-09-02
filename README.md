@@ -1,6 +1,6 @@
 # Cicord
 ![Static Badge](https://img.shields.io/badge/noob-coding-blue)
-![Build](https://github.com/Cichaj/Cicord/actions/workflows/python-app.yml/badge.svg)
+[![Build](https://github.com/Cichaj/Cicord/actions/workflows/build.yml/badge.svg)][https://github.com/rafalsoja/Cicord/actions/workflows/build.yml]
 [![🚀 Deploy to Server](https://github.com/rafalsoja/Cicord/actions/workflows/deploy.yml/badge.svg)](https://github.com/rafalsoja/Cicord/actions/workflows/deploy.yml)
 
 
