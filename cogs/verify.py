@@ -81,7 +81,7 @@ class Verification(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(manage_guild=True)
-    async def setupverify(self, ctx, role: discord.Role, secret: str = "psa", *, question: str = "Podaj hasło"):
+    async def setupverify(self, ctx, role: discord.Role, secret: str, *, question: str = "Podaj hasło"):
         bot_member = ctx.guild.get_member(ctx.bot.user.id)
         if role.position >= bot_member.top_role.position:
             await ctx.send("❌ Bot jest niżej w hierarchii niż rola.")
